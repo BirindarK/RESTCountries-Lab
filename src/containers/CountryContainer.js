@@ -5,6 +5,15 @@ const CountryContainer = ({ markAsVisited }) => {
     const [countries, setCountries] = useState([]);
     const [visitedCountries, setVisitedCountries] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [visited] = useState(false);
+    const [isVisited, setIsVisited] = useState(visited);
+    const [country] = useState([]);
+
+
+    const handleVisit = () => {
+        setIsVisited(!isVisited);
+        markAsVisited(country.name.official);
+    };
     
     useEffect(() => {
         const loadCountries = async () => {
@@ -51,6 +60,8 @@ const CountryContainer = ({ markAsVisited }) => {
                 countries={unvisitedCountries}
                 markAsVisited={handleMarkAsVisited}
                 visited={false}
+                handleVisit={handleVisit}
+                country={country}
             />
             </div>
             <div className="visited">

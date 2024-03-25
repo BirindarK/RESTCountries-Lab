@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 
-const Country = ({ country, markAsVisited, visited }) => {
-    const [isVisited, setIsVisited] = useState(visited);
-
-    const handleVisit = () => {
-        setIsVisited(!isVisited);
-        markAsVisited(country.name.official);
-    };
-
+const Country = ({ country}) => { 
     const countryName = country.name.official;
 
     const countryCapital = country.capital && country.capital.map((capital, index) => (
