@@ -1,5 +1,4 @@
 
-import React from "react";
 import Country from "./Country";
 
 const CountryList = ({ countries, markAsVisited, visited }) => {
@@ -23,6 +22,5 @@ const CountryList = ({ countries, markAsVisited, visited }) => {
 };
 
 export default CountryList;
-
 
      

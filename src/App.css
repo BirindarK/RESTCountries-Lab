@@ -51,6 +51,10 @@
   margin-right: 20px; 
 }
 
-.search-form{
+input{
   align-items: right;
+}
+
+h1 {
+  text-align: center;
 }

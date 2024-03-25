@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+const Country = ({ country, markAsVisited }) => {
+    
+    const handleVisit = () => {
+        markAsVisited(country.name.official);
+    };
 
-const Country = ({ country}) => { 
     const countryName = country.name.official;
 
     const countryCapital = country.capital && country.capital.map((capital, index) => (
@@ -14,16 +17,16 @@ const Country = ({ country}) => {
     const countryFlag = country.flag;
 
     return (
-        <>
+        <div>
             <h2>{countryName}</h2>
             <ul>
-                <p>Name: {country.name.common}</p>
-                <p>Capital: {countryCapital}</p>
-                <p>Currencies: {countryCurrency}</p>
-                <p>Flag: {countryFlag}</p>
-                {!isVisited && <button onClick={handleVisit}>Visit</button>}
+                <li>Name: {country.name.common}</li>
+                <li>Capital: {countryCapital}</li>
+                <li>Currencies: {countryCurrency}</li>
+                <li>Flag: {countryFlag}</li>
             </ul>
-        </>
+            <button onClick={handleVisit}>Visit</button>
+        </div>
     );
 };
 
