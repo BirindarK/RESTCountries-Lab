@@ -1,11 +1,11 @@
-
 import React, { useEffect, useState } from "react";
 import CountryList from "../components/CountryList";
 
 const CountryContainer = ({ markAsVisited }) => {
     const [countries, setCountries] = useState([]);
     const [visitedCountries, setVisitedCountries] = useState([]);
-
+    const [searchQuery, setSearchQuery] = useState('');
+    
     useEffect(() => {
         const loadCountries = async () => {
             const response = await fetch("https://restcountries.com/v3.1/all");
@@ -24,10 +24,27 @@ const CountryContainer = ({ markAsVisited }) => {
         setVisitedCountries([...visitedCountries, countryName]);
     };
 
-    const unvisitedCountries = countries.filter(country => !visitedCountries.includes(country.name.official));
-    const visitedCountriesList = countries.filter(country => visitedCountries.includes(country.name.official));
+    const handleSearch = (event) => {
+        setSearchQuery(event.target.value);
+    }
+
+    const filteredCountries = countries.filter(country =>
+        country.name.official.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const unvisitedCountries = filteredCountries.filter(country => !visitedCountries.includes(country.name.official));
+    const visitedCountriesList = filteredCountries.filter(country => visitedCountries.includes(country.name.official));
 
     return (
+        <>
+        <div className="search-form">
+        <input
+            type="text"
+            placeholder="Search for country..."
+            value={searchQuery}
+            onChange={handleSearch}
+        />
+    </div>
         <div className = "countries">
         <div className = "unvisited">
             <CountryList
@@ -44,6 +61,7 @@ const CountryContainer = ({ markAsVisited }) => {
             />
             </div>
         </div>
+        </>
     );
 };
 
